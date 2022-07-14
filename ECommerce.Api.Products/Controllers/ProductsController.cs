@@ -36,7 +36,6 @@ namespace ECommerce.Api.Products.Controllers
             {
                 return NotFound();
             }
-
         }
     }
 }
