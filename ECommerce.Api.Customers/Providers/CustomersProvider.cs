@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Api.Customers.Providers
 {
+
     public class CustomersProvider : ICustomersProvider
     {
         private readonly CustomersDbContext dbContext;
@@ -29,13 +30,13 @@ namespace ECommerce.Api.Customers.Providers
             if (!dbContext.Customers.Any())
             {
                 dbContext.Customers.Add(new Db.Customer() { Id = 1, Name = "Nick", Address = "Gade 45" });
-                dbContext.Customers.Add(new Db.Customer() { Id = 1, Name = "Fin", Address = "Gade 47" });
-                dbContext.Customers.Add(new Db.Customer() { Id = 1, Name = "Jason", Address = "Gade 49" });
+                dbContext.Customers.Add(new Db.Customer() { Id = 2, Name = "Fin", Address = "Gade 47" });
+                dbContext.Customers.Add(new Db.Customer() { Id = 3, Name = "Jason", Address = "Gade 49" });
                 dbContext.SaveChanges();
             }
         }
 
-        public async Task<(bool IsSuccess, Db.Customer Customer, string ErrorMessage)> GetCustomerAsync(int id)
+        public async Task<(bool IsSuccess, IEnumerable<Models.Customer> Customers, string ErrorMessage)> GetCustomersAsync()
         {
             try
             {
@@ -51,14 +52,30 @@ namespace ECommerce.Api.Customers.Providers
             }
             catch (Exception ex)
             {
-
-                throw;
+                logger?.LogError(ex.ToString());
+                return (false, null, ex.Message);
             }
         }
 
-        public Task<(bool IsSuccess, IEnumerable<Db.Customer> Customers, string ErrorMessage)> GetCustomersAsync()
+        public async Task<(bool IsSuccess, Models.Customer Customer, string ErrorMessage)> GetCustomerAsync(int id)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                logger?.LogInformation("Querying customers");
+                var customer = await dbContext.Customers.FirstOrDefaultAsync(c => c.Id == id);
+                if (customer != null)
+                {
+                    logger?.LogInformation("Customer found");
+                    var result = mapper.Map<Db.Customer, Models.Customer>(customer);
+                    return (true, result, null);
+                }
+                return (false, null, "Not found");
+            }
+            catch (Exception ex)
+            {
+                logger?.LogError(ex.ToString());
+                return (false, null, ex.Message);
+            }
         }
     }
 }

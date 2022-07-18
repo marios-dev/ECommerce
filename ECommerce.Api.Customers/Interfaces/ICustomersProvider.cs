@@ -1,4 +1,4 @@
-﻿using ECommerce.Api.Customers.Db;
+﻿using ECommerce.Api.Customers.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

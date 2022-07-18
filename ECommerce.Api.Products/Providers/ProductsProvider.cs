@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Api.Products.Providers
 {
-    public class ProductsProvider : IProductsprovider
+    public class ProductsProvider : IProductsProvider
     {
         private readonly ProductsDbContext dbContext;
         private readonly ILogger<ProductsProvider> logger;

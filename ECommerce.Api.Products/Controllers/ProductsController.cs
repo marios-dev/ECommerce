@@ -8,9 +8,9 @@ namespace ECommerce.Api.Products.Controllers
     [Route("api/products")]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductsprovider productsProvider;
+        private readonly IProductsProvider productsProvider;
 
-        public ProductsController(IProductsprovider productsProvider)
+        public ProductsController(IProductsProvider productsProvider)
         {
             this.productsProvider = productsProvider;
         }

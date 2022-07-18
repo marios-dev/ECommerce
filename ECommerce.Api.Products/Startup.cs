@@ -22,7 +22,7 @@ namespace ECommerce.Api.Products
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IProductsprovider, ProductsProvider>();
+            services.AddScoped<IProductsProvider, ProductsProvider>();
             services.AddAutoMapper(typeof(Startup));
             services.AddDbContext<ProductsDbContext>(options =>
             {
