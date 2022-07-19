@@ -9,10 +9,12 @@ namespace ECommerce.Api.Orders.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly IOrdersProvider ordersProvider;
+
         public OrdersController(IOrdersProvider ordersProvider)
         {
             this.ordersProvider = ordersProvider;
         }
+
         [HttpGet("{customerId}")]
         public async Task<IActionResult> GetOrdersAsync(int customerId)
         {
