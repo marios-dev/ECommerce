@@ -48,11 +48,11 @@ namespace ECommerceApiProductsTest
 
             var productsProvider = new ProductsProvider(dbContext, null, mapper);
 
-            var product = await productsProvider.GetProductAsync(1);
-            Assert.True(product.isSuccess);
-            Assert.NotNull(product.Product);
-            Assert.True(product.Product.Id == 1);
-            Assert.Null(product.ErrorMessage);
+            var product = await productsProvider.GetProductAsync(-1);
+            Assert.False(product.isSuccess);
+            Assert.Null(product.Product);
+            //Assert.True(product.Product.Id == 1);
+            Assert.NotNull(product.ErrorMessage);
         }
         private void CreateProducts(ProductsDbContext dbContext)
         {
