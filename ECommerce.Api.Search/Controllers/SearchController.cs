@@ -25,6 +25,7 @@ namespace ECommerce.Api.Search.Controllers
                 return Ok(result.SearchResults);
             }
             return NotFound();
+            //test powershell
         }
     }
 }
